@@ -1,16 +1,18 @@
 public class Main {
     public static void main(String[] args) {
-        int[] arr ={10, 1, 32, 3, 45};
-        int min = findMin(arr, arr.length);
-        System.out.println("Min is " + min);
+        int[] arr ={3, 2, 4, 1};
+
+        double aver = findAver(arr, arr.length);
+        System.out.println("Average is " + aver);
     }
 
-    public static int findMin(int[] arr, int n){
-        if(n==1)
-            return arr[0];
+    public static double findAver(int[] arr, int n){
+        if(n==0)
+            return 0;
         else{
-            int min = findMin(arr, n-1);
-            return Math.min(min, arr[n-1]);
+            double sum = findAver(arr, n-1)*(n-1);
+            sum+=arr[n-1];
+            return sum/n;
         }
 
     }
