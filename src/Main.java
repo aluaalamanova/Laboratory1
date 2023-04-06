@@ -1,32 +1,34 @@
 /**
  *Problem 2. You are given a number “n” and an array of “n” elements, write the function that returns average of them.
- * @param arr is an array of integers of which you have to find average.
- * @param n is the length of an array.
- * @param aver is the average of the array which is find by recursive function findAverage.
- * @findMin this function finds the average of an array recursively.
- * @return this function returns average.
+ * @param n is the number which we need to check is prime or composite.
+ * @param i is the divisor which is being checked.
+ * @isPrime this recursive function check if number is prime.
+ * @return this function returns true or false.
 */
 
 import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in); // Create a new Scanner object to read input
-        int n = sc.nextInt(); // Read an integer from the user to determine array size
-        int[] arr = new int[n]; // Create an array of size n
-        for (int i = 0; i < n; i++) { // Loop through array to read values from the user
-            arr[i] = sc.nextInt();
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a number: ");
+        int n = scanner.nextInt(); // Read the user's input as an integer
+        // Call the isPrime() function to check if the number is prime
+        if (isPrime(n, 2)) {
+            System.out.println(n + "Prime");
+        } else {
+            System.out.println(n + "Composite");
         }
-        double aver = findAver(arr, n);  // call findAver method to find the average
-        System.out.println("Average is " + aver);  // prints the average value
     }
 
-    public static double findAver(int[] arr, int n){
-        if(n==0)  // base case of the recursive function
-            return 0;
-        else{
-            double sum = findAver(arr, n-1)*(n-1); // call findAver recursively to find the sum of array
-            sum+=arr[n-1];   // add the last element of the array to the sum
-            return sum/n;  // return the average
+    public static boolean isPrime(int n, int i) {
+        if (n <= 1 || n % i == 0) { // 0 and 1 are not prime numbers and if n is divisible by i, n is not prime
+            return false;
         }
+        if (i > Math.sqrt(n)) { // Base case: if i reaches the square root of n, n is prime
+            return true;
+        }
+
+        return isPrime(n, i+1); // Check the next value of i
     }
 }
