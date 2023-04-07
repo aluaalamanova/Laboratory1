@@ -1,34 +1,41 @@
 /**
- *Problem 2. You are given a number “n” and an array of “n” elements, write the function that returns average of them.
- * @param n is the number which we need to check is prime or composite.
- * @param i is the divisor which is being checked.
- * @isPrime this recursive function check if number is prime.
- * @return this function returns true or false.
-*/
+ *Problem 7. You are given a number “n” and an array of “n” elements,
+ * write the program that returns given array in reverse order without using array data structure.
+ * @param arr is an array of integers of which you have to find reverse.
+ * @param n is the length of an array.
+ * @param first1 is first element of an array.
+ * @param last1 is the last element of an array.
+ * @param store is variable which is used to store the value for swap.
+ * @getReverse this function reverse array by replasing last and first elements recursively.
+ */
 
 import java.util.Scanner;
-
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter a number: ");
-        int n = scanner.nextInt(); // Read the user's input as an integer
-        // Call the isPrime() function to check if the number is prime
-        if (isPrime(n, 2)) {
-            System.out.println(n + "Prime");
-        } else {
-            System.out.println(n + "Composite");
+        Scanner sc = new Scanner(System.in); // Create a new Scanner object to read input
+        int n = sc.nextInt(); // Read an integer from the user to determine array size
+        int[] arr = new int[n]; // Create an array of size n
+
+        for (int i = 0; i < n; i++) { // Loop through array to read values from the user
+            arr[i] = sc.nextInt();
+        }
+
+        getReverse(arr, 0, n-1); // Call the getReverse function to reverse an array
+        for (int i = 0; i < n; i++) {   // Create loop to get output
+            System.out.print(arr[i] + " ");   // Print the result
         }
     }
 
-    public static boolean isPrime(int n, int i) {
-        if (n <= 1 || n % i == 0) { // 0 and 1 are not prime numbers and if n is divisible by i, n is not prime
-            return false;
+    public static void getReverse(int[] arr, int first1, int last1) {
+        if (first1 >= last1) {  // If there is 0 or 1 elements it won't be reversed (base case)
+            return;
+        } else {
+            // Swap the elements at start and end indices
+            int store = arr[first1];
+            arr[first1] = arr[last1];
+            arr[last1] = store;
+            // Recursively reverse the subarray
+            getReverse(arr, first1 + 1, last1 - 1);
         }
-        if (i > Math.sqrt(n)) { // Base case: if i reaches the square root of n, n is prime
-            return true;
-        }
-
-        return isPrime(n, i+1); // Check the next value of i
     }
 }
